@@ -1,0 +1,14 @@
+{
+    "name":"pwa渐进式web",
+    "short_name":"pwa",
+    "icons":[{
+        "src": "./image/icon.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }],
+    "orientation": "portrait",
+    "background_color":"#9b59b6",
+    "theme_color":"#34495e",
+    "display":"standalone",
+    "start_url":"/"
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入pwa程序清单 -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    缘分妙不可言
+    <img src="/image/icon.png" alt="">
+    <script>
+        // 页面加载完之后，注册serviceWorker
+        window.addEventListener('load',async ()=>{
+            // 检测是否可用
+            if('serviceWorker' in navigator){
+                try{
+                    const registration = await navigator.serviceWorker.register('./sw.js');
+                    console.log("注册成功",registration)
+                }catch(e){
+                    console.log("注册失败",e)
+                }
+            }
+        });
+
+        //如果一进来我们发现用户没有联网就给用户一个通知
+        if(Notification.permission=='defalut'){
+            //授权开启通知
+            Notification.requestPermission();
+        }
+        if(!navigator.onLine){
+            //断网
+            console.log("断网")
+            new Notification("提示",{body:'网络已断开,您访问的是缓存',icon:'/image/icon.png'})
+        }
+
+        window.addEventListener("online",()=>{
+            console.log("网络已连接")
+            new Notification("提示",{body:'网络已连接，请刷新页面获取新的数据',icon:'/image/icon.png'})
+        })
+    </script>
+</body>
+</html>
